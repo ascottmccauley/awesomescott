@@ -83,3 +83,6 @@ dist
 
 # Service worker
 sw.*
+
+#Firebase Cache
+.firebase

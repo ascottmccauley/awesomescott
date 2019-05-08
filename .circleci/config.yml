@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default-executor:
     docker:
-      - image: cypress/base:10
+      - image: node:10
 
 jobs:
   install-dependencies:
@@ -47,6 +47,15 @@ jobs:
       - run:
           name: 'Run linter'
           command: npm run lint
+
+  run-unit-tests:
+    executor: default-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: 'Run unit tests'
+          command: npm run test:unit
 
   build:
     executor: default-executor
@@ -95,13 +104,11 @@ workflows:
       - run-unit-tests:
           requires:
             - install-dependencies
-      - run-e2e-tests:
-          requires:
-            - install-dependencies
       - build:
           requires:
             - check-prettier
             - check-linter
+            - run-unit-tests
       - check-bundles-sizes:
           requires:
             - build
