@@ -69,16 +69,6 @@ jobs:
           root: .
           paths: .
 
-  check-bundles-sizes:
-    docker:
-      - image: node:10
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Check bundles sizes'
-          command: npm run bundlesize
-
   deploy:
     docker:
       - image: node:10
@@ -111,9 +101,6 @@ workflows:
             - check-prettier
             - check-linter
             - run-unit-tests
-      - check-bundles-sizes:
-          requires:
-            - build
       - deploy:
           requires:
             - check-bundles-sizes

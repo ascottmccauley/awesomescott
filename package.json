@@ -16,7 +16,6 @@
     "prettier:format-all": "prettier --write \"**/*.{vue,scss,sass,js}\"",
     "prettier:check": "prettier \"**/*.{vue,scss,sass,js}\" --list-different",
     "firebase:deploy:ci": "firebase deploy --non-interactive --token $FIREBASE_TOKEN",
-    "bundlesize": "bundlesize"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.3.0",
