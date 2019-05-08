@@ -101,6 +101,4 @@ workflows:
             - check-prettier
             - check-linter
             - run-unit-tests
-      - deploy:
-          requires:
-            - check-bundles-sizes
+      - deploy
