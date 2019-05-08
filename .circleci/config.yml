@@ -1,15 +1,9 @@
 version: 2.1
 
-executors:
-  default-executor:
-    docker:
-    - image: node:10
-
 jobs:
   install-dependencies:
     docker:
       - image: node:10
-    executor: default-executor
     steps:
       - checkout
       - restore_cache:
@@ -34,7 +28,6 @@ jobs:
   check-prettier:
     docker:
       - image: node:10
-    executor: default-executor
     steps:
       - attach_workspace:
           at: .
@@ -45,7 +38,6 @@ jobs:
   check-linter:
     docker:
       - image: node:10
-    executor: default-executor
     steps:
       - attach_workspace:
           at: .
@@ -56,7 +48,6 @@ jobs:
   run-unit-tests:
     docker:
       - image: node:10
-    executor: default-executor
     steps:
       - attach_workspace:
           at: .
@@ -64,25 +55,10 @@ jobs:
           name: 'Run unit tests'
           command: npm run test:unit
 
-  run-e2e-tests:
-    docker:
-      - image: node:10
-    executor: default-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-            - v2-deps-{{ checksum "package-lock.json" }}
-            - v2-deps
-      - run:
-          name: 'Run e2e tests'
-          command: npm run test:e2e:headless
-
   build:
     docker:
       - image: node:10
-    executor: default-executor
+
     steps:
       - attach_workspace:
           at: .
@@ -96,7 +72,6 @@ jobs:
   check-bundles-sizes:
     docker:
       - image: node:10
-    executor: default-executor
     steps:
       - attach_workspace:
           at: .
@@ -107,7 +82,6 @@ jobs:
   deploy:
     docker:
       - image: node:10
-    executor: default-executor
     steps:
       - attach_workspace:
           at: .
@@ -132,15 +106,11 @@ workflows:
       - run-unit-tests:
           requires:
             - install-dependencies
-      - run-e2e-tests:
-          requires:
-            - install-dependencies
       - build:
           requires:
             - check-prettier
             - check-linter
             - run-unit-tests
-            - run-e2e-tests
       - check-bundles-sizes:
           requires:
             - build
