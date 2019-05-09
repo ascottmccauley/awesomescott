@@ -60,7 +60,7 @@ jobs:
           at: .
       - run:
           name: 'Build'
-          command: npm run build
+          command: npm run generate && npm run build
       - persist_to_workspace:
           root: .
           paths: .
