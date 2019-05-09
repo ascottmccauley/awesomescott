@@ -17,6 +17,12 @@ jobs:
       - run:
           name: 'Install dependencies'
           command: npm ci
+      - run:
+          name: 'Generate it'
+          command: npm run generate
+      - run:
+          name: 'Build it'
+          command: npm run build
       - save_cache:
           paths:
             - ~/.npm
