@@ -47,6 +47,7 @@ export default {
           .signInWithEmailAndPassword(this.email, this.password)
           .then(result => {
             this.success = 'it worked'
+            // TOOD: why is this returning undefined?
             console.log(result.uid)
             // admin.auth().setCustomUserClaims(result.uid, { admin: true })
             // this.$router.replace({ path: '/' })

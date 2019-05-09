@@ -10,18 +10,18 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      # - restore_cache:
-      #     keys:
-      #       - v2-deps-{{ checksum "package-lock.json" }}
-      #       - v2-deps
+      - restore_cache:
+          keys:
+            - v2-deps-{{ checksum "package-lock.json" }}
+            - v2-deps
       - run:
           name: 'Install dependencies'
           command: npm ci
-      # - save_cache:
-      #     paths:
-      #       - ~/.npm
-      #       - ~/.cache
-      #     key: v2-deps-{{ checksum "package-lock.json" }}
+      - save_cache:
+          paths:
+            - ~/.npm
+            - ~/.cache
+          key: v2-deps-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: .
           paths: .
@@ -82,23 +82,20 @@ workflows:
   build-and-deploy:
     jobs:
       - install-dependencies
-      # - check-prettier:
-      #     requires:
-      #       - install-dependencies
-      # - check-linter:
-      #     requires:
-      #       - install-dependencies
-      # - run-unit-tests:
-      #     requires:
-      #       - install-dependencies
-      # - build:
-      #     requires:
-      #       - check-prettier
-      #       - check-linter
-      #       - run-unit-tests
-      - build:
+      - check-prettier:
           requires:
             - install-dependencies
+      - check-linter:
+          requires:
+            - install-dependencies
+      - run-unit-tests:
+          requires:
+            - install-dependencies
+      - build:
+          requires:
+            - check-prettier
+            - check-linter
+            - run-unit-tests
       - deploy:
           requires:
             - build
