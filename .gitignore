@@ -89,3 +89,4 @@ sw.*
 
 #Firebase
 .firebase/*
+functions/*
