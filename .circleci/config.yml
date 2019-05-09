@@ -17,17 +17,17 @@ jobs:
       - run:
           name: 'Install dependencies'
           command: npm ci
+      - save_cache:
+          paths:
+            - ~/.npm
+            - ~/.cache
+          key: v2-deps-{{ checksum "package-lock.json" }}
       - run:
           name: 'Generate it'
           command: npm run generate
       - run:
           name: 'Build it'
           command: npm run build
-      - save_cache:
-          paths:
-            - ~/.npm
-            - ~/.cache
-          key: v2-deps-{{ checksum "package-lock.json" }}
       - run:
           name: 'Deploy'
           command: npm run firebase:deploy:ci
