@@ -60,7 +60,7 @@ jobs:
           at: .
       - run:
           name: 'Build'
-          command: npm run build && npm run firebase:deploy:ci
+          command: npm run build
       - persist_to_workspace:
           root: .
           paths: .
