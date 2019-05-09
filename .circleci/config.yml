@@ -10,18 +10,18 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v2-deps-{{ checksum "package-lock.json" }}
-            - v2-deps
+      # - restore_cache:
+      #     keys:
+      #       - v2-deps-{{ checksum "package-lock.json" }}
+      #       - v2-deps
       - run:
           name: 'Install dependencies'
           command: npm ci
-      - save_cache:
-          paths:
-            - ~/.npm
-            - ~/.cache
-          key: v2-deps-{{ checksum "package-lock.json" }}
+      # - save_cache:
+      #     paths:
+      #       - ~/.npm
+      #       - ~/.cache
+      #     key: v2-deps-{{ checksum "package-lock.json" }}
       - persist_to_workspace:
           root: .
           paths: .
@@ -32,7 +32,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: 'Run prettier check on project files'
+          name: 'Run Prettier'
           command: npm run prettier:check
 
   check-linter:
@@ -41,7 +41,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: 'Run linter'
+          name: 'Run Lint'
           command: npm run lint
 
   run-unit-tests:
@@ -50,7 +50,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: 'Run unit tests'
+          name: 'Run Unit Tests'
           command: npm run test:unit
 
   build:
@@ -71,7 +71,7 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: 'Firebase deploy'
+          name: 'Firebase Deploy'
           command: |
             if [[ "$CIRCLE_BRANCH" == "master" ]]; then
               npm run firebase:deploy:ci
