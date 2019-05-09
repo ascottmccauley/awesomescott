@@ -53,29 +53,17 @@ jobs:
           name: 'Run unit tests'
           command: npm run test:unit
 
-  build:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Build'
-          command: npm run build
-      - persist_to_workspace:
-          root: .
-          paths: .
-
   deploy:
     executor: my-executor
     steps:
       - attach_workspace:
           at: .
       - run:
-          name: 'Firebase deploy'
-          command: |
-            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
-              npm run firebase:deploy:ci
-            fi
+          name: 'Build'
+          command: npm run build && npm run firebase:deploy:ci
+      - persist_to_workspace:
+          root: .
+          paths: .
 
 workflows:
   version: 2
@@ -91,11 +79,8 @@ workflows:
       - run-unit-tests:
           requires:
             - install-dependencies
-      - build:
+      - deploy:
           requires:
             - check-prettier
             - check-linter
             - run-unit-tests
-      - deploy:
-          requires:
-            - build
