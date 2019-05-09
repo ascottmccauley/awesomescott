@@ -96,7 +96,9 @@ workflows:
       #       - check-prettier
       #       - check-linter
       #       - run-unit-tests
-      - build
+      - deploy:
+          requires:
+            - install-dependencies
       - deploy:
           requires:
             - build
