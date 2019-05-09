@@ -4,7 +4,6 @@ executors:
   my-executor:
     docker:
       - image: node:10
-    working_directory: .
 
 jobs:
   install-dependencies:
