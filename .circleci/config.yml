@@ -1,9 +1,14 @@
 version: 2.1
 
-jobs:
-  install-dependencies:
+executors:
+  my-executor:
     docker:
       - image: node:10
+    working_directory: .
+
+jobs:
+  install-dependencies:
+    executor: my-executor
     steps:
       - checkout
       - restore_cache:
@@ -23,8 +28,7 @@ jobs:
           paths: .
 
   check-prettier:
-    docker:
-      - image: node:10
+    executor: my-executor
     steps:
       - attach_workspace:
           at: .
@@ -33,8 +37,7 @@ jobs:
           command: npm run prettier:check
 
   check-linter:
-    docker:
-      - image: node:10
+    executor: my-executor
     steps:
       - attach_workspace:
           at: .
@@ -43,8 +46,7 @@ jobs:
           command: npm run lint
 
   run-unit-tests:
-    docker:
-      - image: node:10
+    executor: my-executor
     steps:
       - attach_workspace:
           at: .
@@ -53,9 +55,7 @@ jobs:
           command: npm run test:unit
 
   build:
-    docker:
-      - image: node:10
-
+    executor: my-executor
     steps:
       - attach_workspace:
           at: .
@@ -67,8 +67,7 @@ jobs:
           paths: .
 
   deploy:
-    docker:
-      - image: node:10
+    executor: my-executor
     steps:
       - attach_workspace:
           at: .
