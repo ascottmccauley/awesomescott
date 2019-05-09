@@ -6,7 +6,7 @@ executors:
       - image: node:10
 
 jobs:
-  install-dependencies:
+  go:
     executor: my-executor
     steps:
       - checkout
@@ -22,80 +22,12 @@ jobs:
             - ~/.npm
             - ~/.cache
           key: v2-deps-{{ checksum "package-lock.json" }}
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  check-prettier:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: .
       - run:
-          name: 'Run prettier check on project files'
-          command: npm run prettier:check
-
-  check-linter:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Run linter'
-          command: npm run lint
-
-  run-unit-tests:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Run unit tests'
-          command: npm run test:unit
-
-  build:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Build'
-          command: npm run build
-      - persist_to_workspace:
-          root: .
-          paths: .
-
-  deploy:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: 'Firebase deploy'
-          command: |
-            if [[ "$CIRCLE_BRANCH" == "master" ]]; then
-              npm run firebase:deploy:ci
-            fi
+          name: 'Deploy'
+          command: npm run firebase:deploy:ci
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - install-dependencies
-      - check-prettier:
-          requires:
-            - install-dependencies
-      - check-linter:
-          requires:
-            - install-dependencies
-      - run-unit-tests:
-          requires:
-            - install-dependencies
-      - build:
-          requires:
-            - check-prettier
-            - check-linter
-            - run-unit-tests
-      - deploy:
-          requires:
-            - build
+      - go
