@@ -49,10 +49,7 @@ module.exports = {
   plugins: [
     '~/plugins/firebase.js',
     '~/plugins/firebase-auth.js',
-    {
-      src: '~/plugins/cloudinary.js',
-      ssr: false
-    }
+    '~/plugins/cloudinary.js'
   ],
 
   /*
