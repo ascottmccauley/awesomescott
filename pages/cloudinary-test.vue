@@ -3,24 +3,25 @@
     <h1>Cloudinary Test</h1>
     <h2>Cloud Name: {{ cloud }}</h2>
     <cld-image
-      cloud-name="demo"
-      public-id="sample"
+      cloudName="demo"
+      publicId="sample"
       crop="scale"
       width="200"
     />
     <cld-image
-      public-id="sample"
+      publicId="sample"
       crop="scale"
       width="200"
     />
     <cld-image
-      public-id="20170615-DSC08186_akq0yz"
+      publicId="20170615-DSC08186_akq0yz"
       crop="scale"
       width="200"
     />
     <cld-image
       :cloud-name="cloud"
-      public-id="sample"
+      publicId="sample"
+      lazy
       crop="scale"
       width="300"
     />
