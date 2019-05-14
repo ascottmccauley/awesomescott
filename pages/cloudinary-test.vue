@@ -22,7 +22,7 @@
       cloudName="{{ cloud }}"
       publicId="sample"
       crop="scale"
-      width: "300"
+      width="300"
     />
   </main>
 </template>
