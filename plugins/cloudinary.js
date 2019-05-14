@@ -7,5 +7,6 @@ Vue.use(Cloudinary, {
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.CLOUDINARY_API_KEY
     // secure: true
-  }
+  },
+  components: ['CldImage', 'CldTransformation']
 })
