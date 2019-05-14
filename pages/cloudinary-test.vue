@@ -1,19 +1,29 @@
 <template>
   <main>
     <h1>Cloudinary Test</h1>
-    <st-cloudinary
-      cloud-name="demo"
-      public-id="lady"
+    <h2>Cloud Name: {{ cloud }}</h2>
+    <cld-image
+      cloudName="demo"
+      publicId="sample"
+      crop="scale"
       width="200"
-      height="200"
-      crop="fill"
     />
-    <st-cloudinary
-      :cloud-name="cloud"
-      public-id="20170615-DSC08186_akq0yz"
+    <cld-image
+      publicId="sample"
+      crop="scale"
       width="200"
-      height="200"
-      crop="fill"
+    />
+    <cld-image
+      publicId="20170615-DSC08186_akq0yz"
+      crop="scale"
+      width="200"
+    />
+    <cld-image
+      :cloud-name="cloud"
+      publicId="sample"
+      lazy
+      crop="scale"
+      width="300"
     />
   </main>
 </template>
