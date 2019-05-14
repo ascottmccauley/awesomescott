@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1>Cloudinary Test</h1>
-    <h2>Cloud Name: {{ cloudName }}</h2>
+    <h2>Cloud Name: {{ cloud }}</h2>
     <cld-image
       cloudName="demo"
       publicId="sample"
@@ -18,13 +18,19 @@
       crop="scale"
       width="200"
     />
+    <cld-image
+      cloudName="{{ cloud }}"
+      publicId="sample"
+      crop="scale"
+      width: "300"
+    />
   </main>
 </template>
 
 <script>
 export default {
   computed: {
-    cloudName() {
+    cloud() {
       return process.env.CLOUDINARY_CLOUD_NAME
     }
   }
