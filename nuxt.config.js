@@ -46,11 +46,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/firebase.js',
-    '~/plugins/firebase-auth.js',
-    '~/plugins/cloudinary.js'
-  ],
+  plugins: ['~/plugins/firebase.js', '~/plugins/firebase-auth.js'],
 
   /*
    ** Nuxt.js modules
