@@ -19,7 +19,7 @@
       width="200"
     />
     <cld-image
-      cloudName="{{ cloud }}"
+      :cloudName="cloud"
       publicId="sample"
       crop="scale"
       width="300"
