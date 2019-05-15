@@ -2,7 +2,7 @@
   <main>
     <h1>Cloudinary Test</h1>
     <h2>Cloud Name: {{ cloud }}</h2>
-    <Thumbnail />
+    <Thumbnail public-id="serenity_6b96_3360x2100_bgjde7" />
   </main>
 </template>
 

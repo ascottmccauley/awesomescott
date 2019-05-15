@@ -4,6 +4,7 @@
       <h2>
         Write to Firestore.
       </h2>
+      <p>Project ID: {{ projectId }}</p>
       <div>
         <input
           id="write-test"
@@ -45,7 +46,8 @@ export default {
       writeTest: '',
       writeSuccessful: false,
       readSuccessful: false,
-      text: ''
+      text: '',
+      projectId: process.env.FIREBASE_PROJECT_ID
     }
   },
   async asyncData({ app, params, error }) {
