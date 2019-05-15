@@ -32,19 +32,6 @@ jobs:
             - ~/.npm
             - ~/.cache
           key: v2-deps-{{ checksum "package-lock.json" }}
-      - restore_cache:
-          keys:
-            - v2-deps-{{ checksum "./functions/package.json" }}
-            - v2-deps
-      - run:
-          name: 'Install functions'
-          working_directory: ~/project/functions
-          command: npm ci
-      - save_cache:
-          paths:
-            - ~/project/functions/node_modules
-            - ~/.cache
-          key: v2-deps-{{ checksum "./functions/package.json" }}
       - persist_to_workspace:
           root: .
           paths: .
