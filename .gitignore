@@ -89,6 +89,7 @@ sw.*
 
 #Firebase
 .firebase/*
+.firebaserc
 
 #TODO
 todo.txt
